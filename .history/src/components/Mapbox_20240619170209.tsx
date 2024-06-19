@@ -14,38 +14,30 @@ const Mapbox = () => {
   const geoControlRef = useRef(null);
   const mapRef = useRef(null);
 
-  //@ts-ignore
   const handleGeolocate = (position) => {
-      const { latitude, longitude } = position.coords;
-      //@ts-ignore
-      setCurrentPosition([longitude, latitude]);
-      setViewport({
-          latitude,
-          longitude,
-          zoom: 15,
-        });
-        //@ts-ignore
-        mapRef.current.flyTo({ center: [longitude, latitude], zoom: 15 });
-    };
-    
-    //@ts-ignore
-    const handleMove = (evt) => {
-        setViewport(evt.viewState);
-    };
-    
-    //@ts-ignore
-    const handleGeolocateUpdate = (position) => {
-        const { latitude, longitude } = position.coords;
-        const newCoordinates = [...coordinates, [longitude, latitude]];
-        //@ts-ignore
-        setCoordinates(newCoordinates);
-        //@ts-ignore
-        setCurrentPosition([longitude, latitude]);
-    };
-    
-    const handleLoad = () => {
-        if (geoControlRef.current) {
-        //@ts-ignore
+    const { latitude, longitude } = position.coords;
+    setCurrentPosition([longitude, latitude]);
+    setViewport({
+      latitude,
+      longitude,
+      zoom: 15,
+    });
+    mapRef.current.flyTo({ center: [longitude, latitude], zoom: 15 });
+  };
+
+  const handleMove = (evt) => {
+    setViewport(evt.viewState);
+  };
+
+  const handleGeolocateUpdate = (position) => {
+    const { latitude, longitude } = position.coords;
+    const newCoordinates = [...coordinates, [longitude, latitude]];
+    setCoordinates(newCoordinates);
+    setCurrentPosition([longitude, latitude]);
+  };
+
+  const handleLoad = () => {
+    if (geoControlRef.current) {
       geoControlRef.current.trigger();
     }
   };
@@ -67,7 +59,7 @@ const Mapbox = () => {
           trackUserLocation={true}
           showUserLocation={true}
           onGeolocate={handleGeolocate}
-
+          onLocationUpdate={handleGeolocateUpdate}
         />
         {currentPosition && (
           <Marker longitude={currentPosition[0]} latitude={currentPosition[1]} />
