@@ -87,7 +87,7 @@ const Mapbox = () => {
                 type="line"
                 paint={{
                   "line-color": "#c8c67f",
-                  "line-width": 4,
+                  "line-width": 8,
                 }}
               />
             </Source>

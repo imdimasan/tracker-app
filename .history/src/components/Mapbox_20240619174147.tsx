@@ -14,30 +14,24 @@ const Mapbox = () => {
   const geoControlRef = useRef(null);
   const mapRef = useRef(null);
 
-  //@ts-ignore
   const handleGeolocate = (position) => {
     const { latitude, longitude } = position.coords;
-    //@ts-ignore
     setCurrentPosition([longitude, latitude]);
-    //@ts-ignore
     setCoordinates((prev) => [...prev, [longitude, latitude]]);
     setViewport({
       latitude,
       longitude,
       zoom: 15,
     });
-    //@ts-ignore
     mapRef.current?.flyTo({ center: [longitude, latitude], zoom: 15 });
   };
 
-  //@ts-ignore
   const handleMove = (evt) => {
     setViewport(evt.viewState);
   };
 
   useEffect(() => {
     if (geoControlRef.current) {
-      //@ts-ignore
       geoControlRef.current.trigger();
     }
   }, [geoControlRef.current]);
@@ -53,7 +47,6 @@ const Mapbox = () => {
           mapStyle="mapbox://styles/mapbox/streets-v11"
           mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
           onMove={handleMove}
-          //@ts-ignore
           onLoad={() => geoControlRef.current?.trigger()}
         >
           <GeolocateControl
@@ -86,8 +79,8 @@ const Mapbox = () => {
                 id="route"
                 type="line"
                 paint={{
-                  "line-color": "#c8c67f",
-                  "line-width": 4,
+                  "line-color": "#888",
+                  "line-width": 8,
                 }}
               />
             </Source>

@@ -16,34 +16,34 @@ const Mapbox = () => {
 
   //@ts-ignore
   const handleGeolocate = (position) => {
-    const { latitude, longitude } = position.coords;
-    //@ts-ignore
-    setCurrentPosition([longitude, latitude]);
-    //@ts-ignore
-    setCoordinates((prev) => [...prev, [longitude, latitude]]);
-    setViewport({
-      latitude,
-      longitude,
-      zoom: 15,
-    });
-    //@ts-ignore
-    mapRef.current?.flyTo({ center: [longitude, latitude], zoom: 15 });
-  };
-
-  //@ts-ignore
-  const handleMove = (evt) => {
-    setViewport(evt.viewState);
-  };
-
-  useEffect(() => {
-    if (geoControlRef.current) {
+      const { latitude, longitude } = position.coords;
       //@ts-ignore
-      geoControlRef.current.trigger();
+      setCurrentPosition([longitude, latitude]);
+      //@ts-ignore
+      setCoordinates((prev) => [...prev, [longitude, latitude]]);
+      setViewport({
+          latitude,
+          longitude,
+          zoom: 15,
+        });
+        //@ts-ignore
+        mapRef.current?.flyTo({ center: [longitude, latitude], zoom: 15 });
+    };
+    
+    //@ts-ignore
+    const handleMove = (evt) => {
+        setViewport(evt.viewState);
+    };
+    
+    useEffect(() => {
+        if (geoControlRef.current) {
+        //@ts-ignore
+        geoControlRef.current.trigger();
     }
   }, [geoControlRef.current]);
 
   return (
-    <>
+      <>
       {" "}
       <div style={{ width: "100%", height: "500px" }}>
         <Map
@@ -86,8 +86,8 @@ const Mapbox = () => {
                 id="route"
                 type="line"
                 paint={{
-                  "line-color": "#c8c67f",
-                  "line-width": 4,
+                  "line-color": "#888",
+                  "line-width": 8,
                 }}
               />
             </Source>
