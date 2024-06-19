@@ -45,7 +45,7 @@ const Mapbox = () => {
     );
 
     return () => navigator.geolocation.clearWatch(watchId);
-
+    //@ts-ignore
   }, []);
 
   useEffect(() => {
